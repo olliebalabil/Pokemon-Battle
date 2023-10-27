@@ -24,10 +24,10 @@ export default function Party({ player }) {
             currentHP: data.stats[0].base_stat,
             fainted: false,
             moves: [
-              { name: data.moves[0].move.name, url: data.moves[0].move.url },
-              { name: data.moves[1].move.name, url: data.moves[0].move.url },
-              { name: data.moves[2].move.name, url: data.moves[0].move.url },
-              { name: data.moves[3].move.name, url: data.moves[0].move.url }
+              { name: data.moves[0].move.name, url: data.moves[0].move.url, power: null},
+              { name: data.moves[1].move.name, url: data.moves[0].move.url, power: null },
+              { name: data.moves[2].move.name, url: data.moves[0].move.url, power: null },
+              { name: data.moves[3].move.name, url: data.moves[0].move.url , power: null}
             ]
           })
         }
