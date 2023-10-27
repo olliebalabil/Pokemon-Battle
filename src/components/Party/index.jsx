@@ -33,7 +33,6 @@ export default function Party({ player }) {
         }
         setParty1(pokemonData)
       }
-      setPokemon1(party1[0])
       
       if (player = user2) {
         
@@ -69,10 +68,6 @@ export default function Party({ player }) {
     
   }, [])
 
-  useEffect(()=> {
-    setPokemon2(party2[0])
-  },[])
-
 
   return (
     <>
@@ -80,12 +75,12 @@ export default function Party({ player }) {
       <div className="party">
 
       {player===user1 && party1.map((el, i)=> 
-        <div className="pokemon-sprite">
+        <div className="pokemon-sprite"  key={i}>
           <img  src={party1[i].sprite} alt={party1[i].name} onClick={setPokemon1(party1[i])}/>
         </div>
       )}
       {player===user2 && party2.map((el, i)=> 
-        <div className="pokemon-sprite">
+        <div className="pokemon-sprite" key={i}>
           <img  src={party2[i].sprite} alt={party2[i].name} onClick={setPokemon2(party2[i])} />
         </div>
       )}
