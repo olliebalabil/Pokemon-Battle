@@ -4,8 +4,7 @@ export default function Playing() {
   const { turn, setTurn, user1, user2, pokemon1, pokemon2, setPokemon1, setPokemon2, party1, party2 } = useData()
   const [hp1, setHp1] = useState(0)
   const [hp2, setHp2] = useState(0)
-  const [message,setMessage] = useState("")
-
+  const [message, setMessage] = useState("")
   useEffect(() => {
     setPokemon1(party1[0])
   }, [user1])
@@ -21,6 +20,17 @@ export default function Playing() {
     setHp2(pokemon2.currentHP)
   }, [pokemon2])
 
+  useEffect(() => {
+    if (hp1 < 0) {
+      setMessage(`${pokemon1.name} has fainted!!`)
+    }
+  }, [hp1])
+  useEffect(() => {
+    if (hp2 < 0) {
+      setMessage(`${pokemon2.name} has fainted!!`)
+    }
+
+  }, [hp2])
 
   const handleMove = (e) => {
     // get power of clicked move
@@ -28,8 +38,15 @@ export default function Playing() {
       const getPower = async () => {
         const response = await fetch(e.target.attributes[0].nodeValue)
         const data = await response.json()
-        
-        setHp2(prevState => prevState - data.power)
+
+        setHp2(prevState => {
+          if (prevState > 0) {
+            prevState - data.power
+          } else {
+            0
+          }
+        })
+
         setMessage(`${user1}: ${pokemon1.name}, use ${e.target.value}!`)
         setTurn(!turn)
       }
@@ -39,9 +56,16 @@ export default function Playing() {
       const getPower = async () => {
         const response = await fetch(e.target.attributes[0].nodeValue)
         const data = await response.json()
-        setHp1(prevState => prevState - data.power)
+        setHp1(prevState => {
+          if (prevState > 0) {
+            prevState - data.power
+          } else {
+            0
+          }
+        })
+
         setMessage(`${user2}: ${pokemon2.name}, use ${e.target.value}!`)
-       
+
         setTurn(!turn)
       }
       getPower()
