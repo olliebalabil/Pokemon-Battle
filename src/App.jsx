@@ -1,35 +1,24 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from "react"
+import { Party, UserForm, Playing } from "./components"
+import { useData } from "./contexts"
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const { user1, user2 } = useData()
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="player">
+        {user1==="Player 1" && <UserForm player={user1} />}
+        
+        <Party player={user1}/>
+        <Playing />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <div className="player">
+        {user2==="Player 2" && <UserForm player={user2} />}
+      
+        <Party player={user2}/>
+        <Playing />
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
-
-export default App
