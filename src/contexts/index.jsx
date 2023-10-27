@@ -166,13 +166,14 @@ export const DataProvider = ({ children }) => {
       ]
     }
   ])
-
+  const [pokemon1,setPokemon1] = useState({})
+  const [pokemon2,setPokemon2] = useState({})
 
 
 
 
   return (
-    <DataContext.Provider value={{ turn, setTurn, user1, setUser1, user2, setUser2, party1, setParty1, party2, setParty2 }}>
+    <DataContext.Provider value={{ turn, setTurn, user1, setUser1, user2, setUser2, party1, setParty1, party2, setParty2 , pokemon1,setPokemon1,pokemon2,setPokemon2}}>
       {children}
     </DataContext.Provider>
   );
