@@ -1,17 +1,33 @@
 import React, { useState, useEffect } from "react"
 import { useData } from "../../contexts"
 export default function Playing() {
-  const { turn, setTurn, user1, user2, pokemon1, pokemon2, setPokemon1, setPokemon2, party1, party2, setParty1,setParty2 } = useData()
-  const [hp1, setHp1] = useState(0)
-  const [hp2, setHp2] = useState(0)
+  const { turn, setTurn, user1, user2, pokemon1, pokemon2, setPokemon1, setPokemon2, party1, party2, setParty1, setParty2 } = useData()
   const [message, setMessage] = useState("")
+
   useEffect(() => {
     setPokemon1(party1[0])
   }, [user1])
-
   useEffect(() => {
     setPokemon2(party2[0])
   }, [user2])
+
+  const loadPokemon1 = () => { //call these when pokemon faints
+    useEffect(() => {
+      setPokemon1(party1[0])
+    }, [user1])
+
+    const [hp1, setHp1] = useState(0)
+
+  }
+
+  const loadPokemon2 = () => {
+    useEffect(() => {
+      setPokemon2(party2[0])
+    }, [user2])
+    const [hp2, setHp2] = useState(0)
+
+  }
+
 
   useEffect(() => {
     setHp1(pokemon1.currentHP)
@@ -24,13 +40,13 @@ export default function Playing() {
     if (hp1 < 0) {
       setMessage(`${pokemon1.name} has fainted!!`)
     }
-    setParty1(party1.filter((el)=> el.name!=pokemon1.name))
+    setParty1(party1.filter((el) => el.name != pokemon1.name))
   }, [hp1])
   useEffect(() => {
     if (hp2 < 0) {
       setMessage(`${pokemon2.name} has fainted!!`)
     }
-    setParty1(party2.filter((el)=> el.name!=pokemon2.name))
+    setParty1(party2.filter((el) => el.name != pokemon2.name))
 
   }, [hp2])
 
