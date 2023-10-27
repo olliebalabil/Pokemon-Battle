@@ -5,8 +5,13 @@ export default function Playing({ player }) {
 
   useEffect(() => {
     setPokemon1(party1[0])
+   
+  }, [user1])
+
+  useEffect(() => {
     setPokemon2(party2[0])
-  }, [])
+   
+  }, [user2])
 
   return (
     <>

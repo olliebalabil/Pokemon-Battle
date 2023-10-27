@@ -84,7 +84,7 @@ export default function Party({ player }) {
         )}
         {player === user2 && party2.map((el, i) =>
           <div className="pokemon-sprite" key={i}>
-            <img src={party2[i].sprite} alt={party2[i].name} onClick={setPokemon2(party2[i])} />
+            <img src={party2[i].sprite} alt={party2[i].name}/>
           </div>
         )}
       </div>
