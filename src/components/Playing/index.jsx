@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useData } from "../../contexts"
 export default function Playing() {
-  const { turn, setTurn, user1, user2, pokemon1, pokemon2, setPokemon1, setPokemon2, party1, party2 } = useData()
+  const { turn, setTurn, user1, user2, pokemon1, pokemon2, setPokemon1, setPokemon2, party1, party2, setParty1,setParty2 } = useData()
   const [hp1, setHp1] = useState(0)
   const [hp2, setHp2] = useState(0)
   const [message, setMessage] = useState("")
@@ -24,11 +24,13 @@ export default function Playing() {
     if (hp1 < 0) {
       setMessage(`${pokemon1.name} has fainted!!`)
     }
+    setParty1(party1.filter((el)=> el.name!=pokemon1.name))
   }, [hp1])
   useEffect(() => {
     if (hp2 < 0) {
       setMessage(`${pokemon2.name} has fainted!!`)
     }
+    setParty1(party2.filter((el)=> el.name!=pokemon2.name))
 
   }, [hp2])
 
@@ -39,14 +41,8 @@ export default function Playing() {
         const response = await fetch(e.target.attributes[0].nodeValue)
         const data = await response.json()
 
-        setHp2(prevState => {
-          if (prevState > 0) {
-            prevState - data.power
-          } else {
-            0
-          }
-        })
-
+        setHp2(prevState => prevState - data.power)
+        console.log(data.power, hp2)
         setMessage(`${user1}: ${pokemon1.name}, use ${e.target.value}!`)
         setTurn(!turn)
       }
@@ -56,13 +52,9 @@ export default function Playing() {
       const getPower = async () => {
         const response = await fetch(e.target.attributes[0].nodeValue)
         const data = await response.json()
-        setHp1(prevState => {
-          if (prevState > 0) {
-            prevState - data.power
-          } else {
-            0
-          }
-        })
+        setHp1(prevState => prevState - data.power)
+        console.log(data.power, hp1)
+
 
         setMessage(`${user2}: ${pokemon2.name}, use ${e.target.value}!`)
 

@@ -8,10 +8,11 @@ export default function App() {
 
   return (
     <>
-      {turn && <h1>{user1}'s turn to play! </h1>}
-      {!turn && <h1>{user2}'s turn to play!</h1>}
-      
-      <Playing/>
+      {(user1 == "Player 1" || user2 == "Player 2") && <h1>Enter your names!</h1>}
+      {user1 != "Player 1" && user2 != "Player 2" && turn && <h1>{user1}'s turn to play! </h1>}
+      {user1 != "Player 1" && user2 != "Player 2" && !turn && <h1>{user2}'s turn to play!</h1>}
+
+      <Playing />
       <div className="player">
         {user1 === "Player 1" && <UserForm player={user1} />}
 
