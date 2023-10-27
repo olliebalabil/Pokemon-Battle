@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import { useData } from "../../contexts"
 
 export default function Party({ player }) {
-  const { user1, user2, setParty1, setParty2 } = useData()
+  const { user1, user2, party1, setParty1, party2, setParty2 } = useData()
 
   useEffect(() => {
     const getParty = async () => {
@@ -71,14 +71,20 @@ export default function Party({ player }) {
   return (
     <>
       <h2>{player}'s Party</h2>
-      <div className="pokemon-sprite">
+      <div className="party">
 
+      {player===user1 && party1.map((el, i)=> 
+        <div className="pokemon-sprite">
+          <img  src={party1[i].sprite} alt={party1[i].name} />
+        </div>
+      )}
+      {player===user2 && party2.map((el, i)=> 
+        <div className="pokemon-sprite">
+          <img  src={party2[i].sprite} alt={party2[i].name} />
+        </div>
+      )}
       </div>
-      <div className="pokemon-sprite"></div>
-      <div className="pokemon-sprite"></div>
-      <div className="pokemon-sprite"></div>
-      <div className="pokemon-sprite"></div>
-      <div className="pokemon-sprite"></div>
+
     </>
   )
 }

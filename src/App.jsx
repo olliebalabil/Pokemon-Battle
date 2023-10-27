@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { Party, UserForm, Playing } from "./components"
 import { useData } from "./contexts"
+import "./App.css"
 
 export default function App() {
   const { user1, user2 } = useData()
