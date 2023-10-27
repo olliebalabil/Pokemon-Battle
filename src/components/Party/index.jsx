@@ -2,17 +2,17 @@ import React, { useState, useEffect } from "react"
 import { useData } from "../../contexts"
 
 export default function Party({ player }) {
-  const { user1, user2, party1, setParty1, party2, setParty2 , setPokemon1, setPokemon2} = useData()
-  
+  const { user1, user2, party1, setParty1, party2, setParty2, setPokemon1, setPokemon2 } = useData()
+
   useEffect(() => {
     const getParty = async () => {
       if (player = user1) {
-        
+
         const pokemon = ["gyarados", "dragonite", "jolteon", "venusaur", "charizard", "blastoise"
-      ]
-      
-      let pokemonData = []
-      
+        ]
+
+        let pokemonData = []
+
         for (let i = 0; i < pokemon.length; i++) {
           const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon[i]}`)
           const data = await response.json()
@@ -33,14 +33,14 @@ export default function Party({ player }) {
         }
         setParty1(pokemonData)
       }
-      
+
       if (player = user2) {
-        
+
         const pokemon = ["tyranitar", "mantine", "scizor", "meganium", "typhlosion", "feraligatr"
-      ]
-      
-      let pokemonData = []
-      
+        ]
+
+        let pokemonData = []
+
         for (let i = 0; i < pokemon.length; i++) {
           const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon[i]}`)
           const data = await response.json()
@@ -61,12 +61,14 @@ export default function Party({ player }) {
           setParty2(pokemonData)
         }
       }
-      
+
     }
     getParty()
-   
-    
+
+
   }, [])
+
+
 
 
   return (
@@ -74,16 +76,17 @@ export default function Party({ player }) {
       <h2>{player}'s Party</h2>
       <div className="party">
 
-      {player===user1 && party1.map((el, i)=> 
-        <div className="pokemon-sprite"  key={i}>
-          <img  src={party1[i].sprite} alt={party1[i].name} onClick={setPokemon1(party1[i])}/>
-        </div>
-      )}
-      {player===user2 && party2.map((el, i)=> 
-        <div className="pokemon-sprite" key={i}>
-          <img  src={party2[i].sprite} alt={party2[i].name} onClick={setPokemon2(party2[i])} />
-        </div>
-      )}
+        {player === user1 && party1.map((el, i) =>
+          <div className="pokemon-sprite" key={i} >
+            <img src={party1[i].sprite} alt={party1[i].name} />
+  
+          </div>
+        )}
+        {player === user2 && party2.map((el, i) =>
+          <div className="pokemon-sprite" key={i}>
+            <img src={party2[i].sprite} alt={party2[i].name} onClick={setPokemon2(party2[i])} />
+          </div>
+        )}
       </div>
 
     </>
